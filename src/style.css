@@ -1,15 +1,7 @@
-/**
-* ! Changing default styles of the browser
-**/
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
 }
 
 i {
@@ -21,24 +13,25 @@ a {
   color: white;
 }
 
-/**
-* ! Navbar STyles are here
-**/
-
 .navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   background-color: #212529;
   color: white;
   padding: 25px 60px;
   margin-bottom: 30px;
 }
 
+.nav-logo {
+  height: 2rem;
+  width: 2rem;
+}
+
 .cart {
   position: relative;
-  background-color: #fff;
-  color: #212529;
+  color: white;
   font-size: 30px;
   padding: 5px;
   border-radius: 4px;
@@ -53,6 +46,16 @@ a {
   color: white;
   padding: 3px;
   border-radius: 3px;
+}
+
+.marketing {
+  margin-top: 8%;
+}
+
+.clothing-marketing {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
 }
 
 /**
@@ -155,33 +158,11 @@ a {
   gap: 15px;
 }
 
-/**
-* ! style rules for cart-item
-**/
-
-.cart-item {
-  border: 2px solid #212529;
-  border-radius: 5px;
-  display: flex;
+.text-body-secondary {
+  margin: 0 1rem 0 1rem;
 }
 
-.title-price-x {
-  width: 195px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* border: 2px solid red; */
+.grid-cards {
+  margin-bottom: 8%;
 }
 
-.title-price {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.cart-item-price {
-  background-color: #212529;
-  color: white;
-  border-radius: 4px;
-  padding: 3px 6px;
-}
