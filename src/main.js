@@ -44,7 +44,9 @@ let generateShop = () => {
                     >
                       +
                     </button>
-                    <small id=${item.id} class="text-body-secondary quantity">${search.item === undefined ? 0 : search.item}</small>
+                    <small id=${item.id} class="text-body-secondary quantity">${
+        search === undefined ? 0 : search.item
+      }</small>
                     <button
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
@@ -67,14 +69,15 @@ generateShop();
 
 let increment = (id) => {
   incrementBasket(id);
-  localStorage.setItem("data",JSON.stringify(basket));
+  localStorage.setItem("data", JSON.stringify(basket));
   update(id);
 };
 
 let decrement = (id) => {
   decrementBasket(id);
-  localStorage.setItem("data",JSON.stringify(basket));
   update(id);
+  basket = basket.filter((x) => x.item !== 0);
+  localStorage.setItem("data", JSON.stringify(basket));
 };
 
 let incrementBasket = (id) => {
@@ -104,16 +107,16 @@ let decrementBasket = (id) => {
 };
 
 let update = (id) => {
-  if(basket.length != 0) {
+  if (basket.length != 0) {
     let search = basket.find((x) => x.id === id);
     document.getElementById(id).innerHTML = search.item;
     calculation();
-  }  
-}
+  }
+};
 
 let calculation = () => {
-  let total = basket.reduce((total,obj) => total + obj.item, 0);
+  let total = basket.reduce((total, obj) => total + obj.item, 0);
   document.getElementById("cart-items-total").innerHTML = total;
-}
+};
 
 calculation();
