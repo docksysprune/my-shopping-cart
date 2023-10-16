@@ -1,3 +1,6 @@
+/**
+ * Getting the grid where the cards for the main page will be displayed
+ */
 let shop = document.getElementById("grid-items");
 
 let shopItemsData = [

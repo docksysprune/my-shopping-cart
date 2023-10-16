@@ -47,4 +47,26 @@ a {
 .quantity {
   margin: 0 1rem 0 1rem;
 }
+.container-card-cart-main {
+  margin-top: 12%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.container-card-cart-grid {
+  display: flex;
+  justify-content: center;
+}
+.card-body-cart {
+  display: flex;
+  justify-content: space-between;
+}
+.card-cart-item-img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+.btn-group-cart {
+  margin-bottom: 3%;
+}
 
