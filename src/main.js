@@ -21,12 +21,7 @@ let shopItemsData = [
   },
 ];
 
-let basket = [
-  {
-    id: 001,
-    item: 1,
-  },
-];
+let basket = [];
 
 console.log(shop);
 
@@ -94,7 +89,7 @@ let incrementBasket = (id) => {
 };
 
 let decrementBasket = (id) => {
-  if (basket) {
+  if (basket.length != 0) {
     let search = basket.find((x) => x.id === id);
     if (search) {
       let res = --search.item;
@@ -108,13 +103,15 @@ let decrementBasket = (id) => {
 };
 
 let update = (id) => {
-  if(basket) {
+  if(basket.length != 0) {
     let search = basket.find((x) => x.id === id);
     document.getElementById(id).innerHTML = search.item;
-    console.log("Update function is running");
+    calculation();
   }  
 }
 
 let calculation = () => {
-  
+  let total = basket.reduce((total,obj) => total + obj.item, 0);
+  document.getElementById("cart-items-total").innerHTML = total;
+  console.log("calculation function is running");
 }
