@@ -42,6 +42,8 @@ let generateCart = () => {
           `;
       }).join("")
   )
+} else {
+  cart.innerHTML = `<h2> The cart is empty, start shopping!</h2>`;
 }};
 
 generateCart();
@@ -66,6 +68,7 @@ let decrement = (id) => {
     update(id);
     basket = basket.filter((x) => x.item !== 0);
     localStorage.setItem("data", JSON.stringify(basket));
+    generateCart();
   }
 };
 
