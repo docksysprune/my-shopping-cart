@@ -2,42 +2,47 @@ let basket = JSON.parse(localStorage.getItem("data") || []);
 let cart = document.getElementById("container-card-cart-grid");
 
 let generateCart = () => {
-  return (
-    cart.innerHTML = basket
-      .map((item) => {
-        let dataItem = shopItemsData.find((x) => x.id === item.id);
+  if (basket.length !== 0) {
+    return (cart.innerHTML = basket
+      .map((it) => {
+        let { id, item } = it;
+        let dataItem = shopItemsData.find((x) => x.id === id) || [];
         return `
-        <div class="card w-60 card-cart-item">
-        <div class="card-body card-body-cart">
-          <div>
-            <h5 class="card-title">
-              ${ dataItem != undefined ? dataItem.name : "Unavailable item"}
-              <small id="${item.id}" class="text-body-secondary quantity"
-                >$45</small
-              >
-            </h5>
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-              +
-            </button>
-            <small class="text-body-secondary quantity">0</small>
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-              -
-            </button>
-            <p class="card-cart-item-total">$350</p>
-            <button type="button" class="btn btn-outline-danger">
-              <i class="bi bi-trash3-fill"></i>
-              Delete
-            </button>
-          </div>
-          <div>
-            <img class="card-cart-item-img" src="./images/baby.png" alt="" />
+          <div class="card w-60 card-cart-item">
+          <div class="card-body card-body-cart">
+            <div>
+              <h5 class="card-title">
+                ${dataItem != undefined ? dataItem.name : "Unavailable item"}
+                <small class="text-body-secondary-quantity"
+                  >$${dataItem != undefined ? dataItem.price : 0}</small
+                >
+              </h5>
+              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="increment('${id}')">
+                +
+              </button>
+              <small id="${id}" class="text-body-secondary quantity">${
+                it != undefined ? item : 0
+              }</small>
+              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrement('${id}')">
+                -
+              </button>
+              <p class="card-cart-item-total">$350</p>
+              <button type="button" class="btn btn-outline-danger">
+                <i class="bi bi-trash3-fill"></i>
+                Delete
+              </button>
+            </div>
+            <div>
+              <img class="card-cart-item-img" src="${
+                dataItem != undefined ? dataItem.img : null
+              }" alt="" />
+            </div>
           </div>
         </div>
-      </div>
-        `
-      })
+          `;
+      }).join("")
   )
-}
+}};
 
 generateCart();
 
@@ -47,3 +52,54 @@ let calculation = () => {
 };
 
 calculation();
+
+let increment = (id) => {
+  incrementBasket(id);
+  localStorage.setItem("data", JSON.stringify(basket));
+  update(id);
+};
+
+let decrement = (id) => {
+  let search = basket.find((x) => x.id === id);
+  if (search != undefined) {
+    decrementBasket(id);
+    update(id);
+    basket = basket.filter((x) => x.item !== 0);
+    localStorage.setItem("data", JSON.stringify(basket));
+  }
+};
+
+let incrementBasket = (id) => {
+  let search = basket.find((x) => x.id === id);
+  if (search === undefined) {
+    basket.push({
+      id: id,
+      item: 1,
+    });
+  } else {
+    search.item += 1;
+  }
+  console.log(basket);
+};
+
+let decrementBasket = (id) => {
+  if (basket.length != 0) {
+    let search = basket.find((x) => x.id === id);
+    if (search) {
+      let res = --search.item;
+      if (res < 0) {
+        search.item = 0;
+      } else {
+        search.item = res;
+      }
+    }
+  }
+};
+
+let update = (id) => {
+  if (basket.length != 0) {
+    let search = basket.find((x) => x.id === id);
+    document.getElementById(id).innerHTML = search.item;
+    calculation();
+  }
+};
