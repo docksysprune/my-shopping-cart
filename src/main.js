@@ -21,13 +21,14 @@ let shopItemsData = [
   },
 ];
 
-let basket = [];
+let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 console.log(shop);
 
 let generateShop = () => {
   return (shop.innerHTML = shopItemsData
     .map((item) => {
+      let search = basket.find((x) => x.id === item.id);
       return `
     <div id=product-id-${item.id} class="col">
             <div class="card shadow-sm">
@@ -43,7 +44,7 @@ let generateShop = () => {
                     >
                       +
                     </button>
-                    <small id=${item.id} class="text-body-secondary quantity">0</small>
+                    <small id=${item.id} class="text-body-secondary quantity">${search.item === undefined ? 0 : search.item}</small>
                     <button
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
@@ -66,13 +67,13 @@ generateShop();
 
 let increment = (id) => {
   incrementBasket(id);
-  console.log(basket);
+  localStorage.setItem("data",JSON.stringify(basket));
   update(id);
 };
 
 let decrement = (id) => {
   decrementBasket(id);
-  console.log(basket);
+  localStorage.setItem("data",JSON.stringify(basket));
   update(id);
 };
 
@@ -113,5 +114,6 @@ let update = (id) => {
 let calculation = () => {
   let total = basket.reduce((total,obj) => total + obj.item, 0);
   document.getElementById("cart-items-total").innerHTML = total;
-  console.log("calculation function is running");
 }
+
+calculation();
