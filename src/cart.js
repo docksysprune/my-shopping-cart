@@ -26,8 +26,8 @@ let generateCart = () => {
               <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrement('${id}')">
                 -
               </button>
-              <p class="card-cart-item-total">$350</p>
-              <button type="button" class="btn btn-outline-danger">
+              <p class="card-cart-item-total">${item * dataItem.price}</p>
+              <button type="button" class="btn btn-outline-danger" onclick="deleteItemCart('${id}')">
                 <i class="bi bi-trash3-fill"></i>
                 Delete
               </button>
@@ -59,6 +59,7 @@ let increment = (id) => {
   incrementBasket(id);
   localStorage.setItem("data", JSON.stringify(basket));
   update(id);
+  generateCart();
 };
 
 let decrement = (id) => {
@@ -106,3 +107,10 @@ let update = (id) => {
     calculation();
   }
 };
+
+let deleteItemCart = (id) => {
+  basket = basket.filter((x) => x.id !== id);
+  localStorage.setItem("data", JSON.stringify(basket));
+  calculation();
+  generateCart();
+}
