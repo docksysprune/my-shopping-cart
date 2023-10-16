@@ -4,7 +4,10 @@
 let shop = document.getElementById("grid-items");
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
-
+/**
+ * 
+ * @returns the generation of the cards according to the data in the data.js file
+ */
 let generateShop = () => {
   return (shop.innerHTML = shopItemsData
     .map((item) => {
@@ -47,12 +50,18 @@ let generateShop = () => {
 
 generateShop();
 
+/**
+ * Will increment the items of the current card
+ */
 let increment = (item) => {
   incrementBasket(item.id);
   localStorage.setItem("data", JSON.stringify(basket));
   update(item.id);
 };
 
+/**
+ * Will decrement the items of the current card
+ */
 let decrement = (item) => {
   let search = basket.find((x) => x.id === item.id);
   if (search != undefined) {

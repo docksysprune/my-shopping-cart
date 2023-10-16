@@ -1,6 +1,9 @@
 let basket = JSON.parse(localStorage.getItem("data") || []);
 let cart = document.getElementById("container-card-cart-grid");
-
+/**
+ * 
+ * @returns the generation of the different cards according to the information stored on the localstorage
+ */
 let generateCart = () => {
   if (basket.length !== 0) {
     return (cart.innerHTML = basket
@@ -46,15 +49,40 @@ let generateCart = () => {
   cart.innerHTML = `<h2> The cart is empty, start shopping!</h2>`;
 }};
 
-generateCart();
-
+/**
+ * Will calculate an update the cart total
+ */
 let calculation = () => {
   let total = basket.reduce((total, obj) => total + obj.item, 0);
   document.getElementById("cart-items-total").innerHTML = total;
 };
 
+/**
+ * Will calculate a global total of all the items selected
+ */
+let calculateTotal = () => {
+  let total = 0;
+
+  basket.forEach(element => {
+    let search = shopItemsData.find((x) => x.id === element.id);
+    if(search != undefined) {
+      total += (element.item * search.price);
+    }
+  });
+
+  document.getElementById("total-cart").innerHTML = total;
+}
+
+/**
+ * These are the first calls to functions that we have to make when showing the cart view
+ */
+calculateTotal();
+generateCart();
 calculation();
 
+/**
+ * Will increment the items of the current card
+ */
 let increment = (id) => {
   incrementBasket(id);
   localStorage.setItem("data", JSON.stringify(basket));
@@ -63,6 +91,9 @@ let increment = (id) => {
   generateCart();
 };
 
+/**
+ * Will decrement the items of the current card
+ */
 let decrement = (id) => {
   let search = basket.find((x) => x.id === id);
   if (search != undefined) {
@@ -125,17 +156,5 @@ let clearCart = () => {
   generateCart();
 }
 
-let calculateTotal = () => {
-  let total = 0;
 
-  basket.forEach(element => {
-    let search = shopItemsData.find((x) => x.id === element.id);
-    if(search != undefined) {
-      total += (element.item * search.price);
-    }
-  });
 
-  document.getElementById("total-cart").innerHTML = total;
-}
-
-calculateTotal();
