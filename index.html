@@ -23,27 +23,16 @@
           <img src="./images/clothes.png" alt="clothes logo" class="nav-logo" />
           Clothing store
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+        <button type="button" class="btn btn-dark position-relative">
+          <i class="bi bi-bag-fill"></i>
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            0
+            <span class="visually-hidden">unread messages</span>
+          </span>
         </button>
       </div>
-      <button type="button" class="btn btn-dark position-relative">
-        <i class="bi bi-bag-fill"></i>
-        <span
-          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-        >
-          0
-          <span class="visually-hidden">unread messages</span>
-        </span>
-      </button>
     </nav>
 
     <main>
@@ -103,8 +92,7 @@
         <div
           class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
           id="grid-items"
-        >
-        </div>
+        ></div>
       </div>
     </main>
     <script
