@@ -1,6 +1,6 @@
 # My shopping cart
 
-It is just a project for practicing the javascropt knowledge acquired throughout the module
+It is just a project for practicing the javascript knowledge acquired throughout the module
 
 ## Getting Started
 

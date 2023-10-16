@@ -3,27 +3,6 @@
  */
 let shop = document.getElementById("grid-items");
 
-let shopItemsData = [
-  {
-    id: 001,
-    name: "casual shirt",
-    price: 45,
-    img: "img-1.jpg",
-  },
-  {
-    id: 002,
-    name: "casual shirt",
-    price: 45,
-    img: "img-2.jpg",
-  },
-  {
-    id: 003,
-    name: "casual shirt",
-    price: 45,
-    img: "img-3.jpg",
-  },
-];
-
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 console.log(shop);
@@ -70,17 +49,21 @@ let generateShop = () => {
 
 generateShop();
 
-let increment = (id) => {
-  incrementBasket(id);
+let increment = (item) => {
+  console.log(item.id);
+  incrementBasket(item.id);
   localStorage.setItem("data", JSON.stringify(basket));
-  update(id);
+  update(item.id);
 };
 
-let decrement = (id) => {
-  decrementBasket(id);
-  update(id);
-  basket = basket.filter((x) => x.item !== 0);
-  localStorage.setItem("data", JSON.stringify(basket));
+let decrement = (item) => {
+  let search = basket.find((x) => x.id === item.id);
+  if (search != undefined) {
+    decrementBasket(item.id);
+    update(item.id);
+    basket = basket.filter((x) => x.item !== 0);
+    localStorage.setItem("data", JSON.stringify(basket));
+  }
 };
 
 let incrementBasket = (id) => {
