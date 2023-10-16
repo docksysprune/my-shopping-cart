@@ -59,6 +59,7 @@ let increment = (id) => {
   incrementBasket(id);
   localStorage.setItem("data", JSON.stringify(basket));
   update(id);
+  calculateTotal();
   generateCart();
 };
 
@@ -69,6 +70,7 @@ let decrement = (id) => {
     update(id);
     basket = basket.filter((x) => x.item !== 0);
     localStorage.setItem("data", JSON.stringify(basket));
+    calculateTotal();
     generateCart();
   }
 };
@@ -83,7 +85,6 @@ let incrementBasket = (id) => {
   } else {
     search.item += 1;
   }
-  console.log(basket);
 };
 
 let decrementBasket = (id) => {
@@ -112,5 +113,29 @@ let deleteItemCart = (id) => {
   basket = basket.filter((x) => x.id !== id);
   localStorage.setItem("data", JSON.stringify(basket));
   calculation();
+  calculateTotal();
   generateCart();
 }
+
+let clearCart = () => {
+  basket = [];
+  localStorage.setItem("data", JSON.stringify(basket));
+  calculation();
+  calculateTotal();
+  generateCart();
+}
+
+let calculateTotal = () => {
+  let total = 0;
+
+  basket.forEach(element => {
+    let search = shopItemsData.find((x) => x.id === element.id);
+    if(search != undefined) {
+      total += (element.item * search.price);
+    }
+  });
+
+  document.getElementById("total-cart").innerHTML = total;
+}
+
+calculateTotal();

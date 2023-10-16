@@ -5,8 +5,6 @@ let shop = document.getElementById("grid-items");
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
-console.log(shop);
-
 let generateShop = () => {
   return (shop.innerHTML = shopItemsData
     .map((item) => {
@@ -50,7 +48,6 @@ let generateShop = () => {
 generateShop();
 
 let increment = (item) => {
-  console.log(item.id);
   incrementBasket(item.id);
   localStorage.setItem("data", JSON.stringify(basket));
   update(item.id);

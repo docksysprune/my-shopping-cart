@@ -38,7 +38,7 @@
     <main class="container-card-cart-main">
       <div>
         <h2 class="fw-normal">
-          Total: <small class="text-body-secondary quantity">$350</small>
+          Total: <small id="total-cart" class="text-body-secondary quantity">$</small>
         </h2>
       </div>
       <div
@@ -47,7 +47,7 @@
         aria-label="Basic mixed styles example"
       >
         <button type="button" class="btn btn-danger">Checkout</button>
-        <button type="button" class="btn btn-success">Clean cart</button>
+        <button type="button" class="btn btn-success" onclick="clearCart()">Clear cart</button>
       </div>
       <div id="container-card-cart-grid" class="container-card-cart-grid">
       </div>
